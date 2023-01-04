@@ -37,33 +37,34 @@ public class Exercise1Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Exercise1Application.class, args);
 		Exercise1Application application = new Exercise1Application();
+		application.schoolService.initData();
 
-//		// ១. តើវិទ្យាល័យនេះមានគ្រូប្រុសប៉ុន្មាននាក់?
-//		application.countTeacherBySex(Sex.MALE);
-//		application.countTeacherBySex(Sex.FEMALE);
-//		// ២. តើថ្នាក់ទី១២ក មានសិស្សស្រីប៉ុន្មាននាក់?
-//		application.countStudentByClassAndSex(12, "ក", Sex.FEMALE);
-//		application.countStudentByClassAndSex(12, "ក", Sex.MALE);
-//		// ៣. តើសំណាងមានសិស្សសរុបប៉ុន្មាននាក់?
-//		application.countStudentByTeacher("Samnang");
-//		// ៤. តើសំណាងបង្រៀនប៉ុន្មានថ្នាក់ក្នុងឆ្នាំសិក្សា២០២២-២០២៣?
-//		application.countClassByTeacherAndSchoolYear("Samnang", 2023);
-//		// ៥. ទាំងគ្រូនិងសិស្សតើមានចំនួនសរុបប៉ុន្មាន?
-//		application.countAllStudentAndTeacher();
-//		// ៦. គ្រូដែលមានអាយុច្រើនជាងគេ ជាគ្រូប្រុសឬស្រី?
-//		application.getSexOfEldestTeacher();
-//		// ៧. គ្រូណាខ្លះដែលមានសិស្សសរុបលើសពី១០០នាក់?
+		// ១. តើវិទ្យាល័យនេះមានគ្រូប្រុសប៉ុន្មាននាក់?
+		application.countTeacherBySex(Sex.MALE);
+		application.countTeacherBySex(Sex.FEMALE);
+		// ២. តើថ្នាក់ទី១២ក មានសិស្សស្រីប៉ុន្មាននាក់?
+		application.countStudentByClassAndSex(12, "ក", Sex.FEMALE);
+		application.countStudentByClassAndSex(12, "ក", Sex.MALE);
+		// ៣. តើសំណាងមានសិស្សសរុបប៉ុន្មាននាក់?
+		application.countStudentByTeacher("Samnang");
+		// ៤. តើសំណាងបង្រៀនប៉ុន្មានថ្នាក់ក្នុងឆ្នាំសិក្សា២០២២-២០២៣?
+		application.countClassByTeacherAndSchoolYear("Samnang", 2023);
+		// ៥. ទាំងគ្រូនិងសិស្សតើមានចំនួនសរុបប៉ុន្មាន?
+		application.countAllStudentAndTeacher();
+		// ៦. គ្រូដែលមានអាយុច្រើនជាងគេ ជាគ្រូប្រុសឬស្រី?
+		application.getSexOfEldestTeacher();
+		// ៧. គ្រូណាខ្លះដែលមានសិស្សសរុបលើសពី១០០នាក់?
 		application.getTeachersWithStudentMoreThanN(20);
-//		// ៨. ថ្នាក់ណាដែលមានសិស្សប្រុសច្រើនជាងគេ?
-//		application.getClassWithMaxStudentBySex(Sex.MALE);
-//		// ៩. សិស្សដែលក្មេងជាងគេមានឈ្មោះអ្វី?
-//		application.getYoungestStudent();
-//		// ១០. តើថ្នាក់ទី១២មានប៉ុន្មានថ្នាក់?
-//		application.countClassByGrade(12);
-//		// ១១. ប្រៀបធៀបចំនួនសិស្សរវាងឆ្នាំសិក្សា២០២១-២០២២ និង ២០២២-២០២៣
-//		// ក្នុងវិទ្យាល័យនេះ
-//		application.countAllStudentBySchoolYear(2023);
-//		application.countAllStudentBySchoolYear(2022);
+		// ៨. ថ្នាក់ណាដែលមានសិស្សប្រុសច្រើនជាងគេ?
+		application.getClassWithMaxStudentBySex(Sex.MALE);
+		// ៩. សិស្សដែលក្មេងជាងគេមានឈ្មោះអ្វី?
+		application.getYoungestStudent();
+		// ១០. តើថ្នាក់ទី១២មានប៉ុន្មានថ្នាក់?
+		application.countClassByGrade(12);
+		// ១១. ប្រៀបធៀបចំនួនសិស្សរវាងឆ្នាំសិក្សា២០២១-២០២២ និង ២០២២-២០២៣
+		// ក្នុងវិទ្យាល័យនេះ
+		application.countAllStudentBySchoolYear(2023);
+		application.countAllStudentBySchoolYear(2022);
 	}
 
 	public Long countTeacherBySex(Sex sex) {

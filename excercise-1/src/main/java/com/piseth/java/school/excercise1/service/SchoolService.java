@@ -31,4 +31,6 @@ public interface SchoolService {
 
 	Long countAllStudentBySchoolYear(int schoolYear);
 
+	void initData();
+
 }

@@ -13,6 +13,9 @@ import com.piseth.java.school.excercise1.domain.Student;
 import com.piseth.java.school.excercise1.domain.Subject;
 import com.piseth.java.school.excercise1.domain.Teacher;
 
+import lombok.Data;
+
+@Data
 public class SchoolServiceImpl implements SchoolService {
 
 	private List<Classroom> mySchool;
@@ -69,16 +72,6 @@ public class SchoolServiceImpl implements SchoolService {
 
 	@Override
 	public List<Teacher> getTeachersWithStudentMoreThanN(int numberOfStudents) {
-		// Modify teachers to add student count to each class he/she teaches.
-		mySchool.forEach(c -> {
-			// System.out.println(c);
-			c.getTeachers().forEach(t -> {
-				// Due to object reference, simply adding the count.
-				t.setStudentCount(t.getStudentCount() + c.getStudents().size());
-				// System.out.println(String.format("%s : %d", t.getName(), t.getStudentCount()));
-			});
-		});
-
 		// Group them together by adding students count and group by teacher's name
 		Map<String, Teacher> tts = mySchool.stream().flatMap(classroom -> classroom.getTeachers().stream())
 				.collect(Collectors.toMap(Teacher::getName, Function.identity(), (t1, t2) -> {
@@ -96,14 +89,14 @@ public class SchoolServiceImpl implements SchoolService {
 				.sorted(Comparator.comparing(Classroom::getStudents, (cs1, cs2) -> {
 					return (int) (cs1.stream().filter(s -> s.getSex().equals(sex)).count()
 							- cs2.stream().filter(ss -> ss.getSex().equals(sex)).count());
-				}).reversed()).limit(1).toList();
+				}).reversed()).toList();
 		return classroom.get(0);
 	}
 
 	@Override
 	public Student getYoungestStudent() {
 		List<Student> students = mySchool.stream().flatMap(c -> c.getStudents().stream())
-				.sorted(Comparator.comparing(Student::getAge)).limit(1).toList();
+				.sorted(Comparator.comparing(Student::getAge)).toList();
 		return students.get(0);
 	}
 
@@ -120,6 +113,9 @@ public class SchoolServiceImpl implements SchoolService {
 
 	public SchoolServiceImpl() {
 		super();
+	}
+
+	public void initData() {
 		// My school contain list of teachers, list of classes, list of students
 		Teacher tSamnang = new Teacher(Subject.MATH, "Samnang", 33, Sex.MALE);
 		Teacher tVeasna = new Teacher(Subject.MATH, "Veasna", 29, Sex.FEMALE);
