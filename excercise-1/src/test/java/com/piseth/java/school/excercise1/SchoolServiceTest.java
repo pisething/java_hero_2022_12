@@ -8,8 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.piseth.java.school.excercise1.helper.SchoolHelper;
+import com.piseth.java.school.excercise1.model.ClassRoom;
 import com.piseth.java.school.excercise1.model.Gender;
-import com.piseth.java.school.excercise1.model.Teacher;
 import com.piseth.java.school.excercise1.service.SchoolService;
 import com.piseth.java.school.excercise1.service.impl.SchoolServiceImpl;
 
@@ -24,11 +24,11 @@ public class SchoolServiceTest {
 	@Test
 	public void testGetNumberOfTeacher() {
 		//given
-		List<Teacher> teachers = SchoolHelper.getTeachers();
+		List<ClassRoom> classRooms = SchoolHelper.getClassRooms();
 		//when
-		Long numberOfTeachers = schoolService.getNumberOfTeachers(teachers, Gender.MALE);
+		Long numberOfTeachers = schoolService.getNumberOfTeachers(classRooms, 2022, Gender.MALE);
 		
 		//then
-		assertEquals(4, numberOfTeachers);
+		assertEquals(3, numberOfTeachers);
 	}
 }
