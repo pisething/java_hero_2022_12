@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.piseth.java.school.excercise1.domain.Classroom;
@@ -13,82 +14,71 @@ import com.piseth.java.school.excercise1.domain.Subject;
 import com.piseth.java.school.excercise1.domain.Teacher;
 
 public class SchoolServiceImplTests {
-
 	private SchoolServiceImpl schoolService = null;
 
 	@Test
 	public void testCountTeacherBySex() {
-		initSchoolService();
-		assertEquals(schoolService.countTeacherBySex(Sex.MALE), 3L);
-		assertEquals(schoolService.countTeacherBySex(Sex.FEMALE), 5L);
+		assertEquals(3L, schoolService.countTeacherBySex(Sex.MALE));
+		assertEquals(5L, schoolService.countTeacherBySex(Sex.FEMALE));
 	}
 
 	@Test
 	public void testCountStudentByClassAndSex() {
-		initSchoolService();
-		assertEquals(schoolService.countStudentByClassAndSex(12, "ក", Sex.FEMALE), 1);
-		assertEquals(schoolService.countStudentByClassAndSex(12, "ក", Sex.MALE), 2);
+		assertEquals(1, schoolService.countStudentByClassAndSex(12, "ក", Sex.FEMALE));
+		assertEquals(2, schoolService.countStudentByClassAndSex(12, "ក", Sex.MALE));
 	}
 
 	@Test
 	public void testCountStudentByTeacher() {
-		initSchoolService();
-		assertEquals(schoolService.countStudentByTeacher("Samnang"), 21);
+		assertEquals(21, schoolService.countStudentByTeacher("Samnang"));
 	}
 
 	@Test
 	public void testCountClassByTeacherAndSchoolYear() {
-		initSchoolService();
-		assertEquals(schoolService.countClassByTeacherAndSchoolYear("Samnang", 2023), 5);
+		assertEquals(5, schoolService.countClassByTeacherAndSchoolYear("Samnang", 2023));
 	}
 
 	@Test
 	public void testCountAllStudentAndTeacher() {
-		initSchoolService();
-		assertEquals(schoolService.countAllStudentAndTeacher(), 51);
+		assertEquals(51, schoolService.countAllStudentAndTeacher());
 	}
 
 	@Test
 	public void testGetSexOfEldestTeacher() {
-		initSchoolService();
-		assertEquals(schoolService.getSexOfEldestTeacher(), Sex.MALE);
+		assertEquals(Sex.MALE, schoolService.getSexOfEldestTeacher());
 	}
 
 	@Test
 	public void testGetTeachersWithStudentMoreThanN() {
-		initSchoolService();
-		assertEquals(schoolService.getTeachersWithStudentMoreThanN(20).size(), 3);
-		assertEquals(schoolService.getTeachersWithStudentMoreThanN(25).size(), 0);
+		assertEquals(3, schoolService.getTeachersWithStudentMoreThanN(20).size());
+		assertEquals(0, schoolService.getTeachersWithStudentMoreThanN(25).size());
 	}
 
 	@Test
 	public void testGetClassWithMaxStudentBySex() {
-		initSchoolService();
 		Classroom c = schoolService.getClassWithMaxStudentBySex(Sex.MALE);
-		assertEquals(c.getName(), "ក");
-		assertEquals(c.getGrade(), 9);
-		assertEquals(c.getSchoolYear(), 2023);
+		assertEquals("ក", c.getName());
+		assertEquals(9, c.getGrade());
+		assertEquals(2023, c.getSchoolYear());
 	}
 
 	@Test
 	public void testGetYoungestStudent() {
-		initSchoolService();
-		assertEquals(schoolService.getYoungestStudent().getName(), "Danny");
+		assertEquals("Danny", schoolService.getYoungestStudent().getName());
 	}
 
 	@Test
 	public void testCountClassByGrade() {
-		initSchoolService();
-		assertEquals(schoolService.countClassByGrade(12), 2L);
+		assertEquals( 2L, schoolService.countClassByGrade(12));
 	}
 
 	@Test
 	public void testCountAllStudentBySchoolYear() {
-		initSchoolService();
 		assertEquals(schoolService.countAllStudentBySchoolYear(2023), 43);
 		assertEquals(schoolService.countAllStudentBySchoolYear(2022), 0);
 	}
 	
+	@BeforeEach
 	private void initSchoolService() {
 		if (schoolService == null) {
 			schoolService = new SchoolServiceImpl();
