@@ -3,15 +3,14 @@ package com.piseth.java.school.excercise1.service;
 import java.util.List;
 
 import com.piseth.java.school.excercise1.domain.Classroom;
-import com.piseth.java.school.excercise1.domain.Sex;
-import com.piseth.java.school.excercise1.domain.Student;
-import com.piseth.java.school.excercise1.domain.Teacher;
+import com.piseth.java.school.excercise1.domain.Gender;
+import com.piseth.java.school.excercise1.domain.Person;
 
 public interface SchoolService {
 
-	Long countTeacherBySex(Sex sex);
+	Long countTeacherByGender(Gender gender);
 
-	Long countStudentByClassAndSex(int grade, String className, Sex sex);
+	Long countStudentByClassAndGender(int grade, String className, Gender gender);
 
 	Long countStudentByTeacher(String tName);
 
@@ -19,13 +18,13 @@ public interface SchoolService {
 
 	Long countAllStudentAndTeacher();
 
-	Sex getSexOfEldestTeacher();
+	Gender getGenderOfEldestTeacher();
 
-	List<Teacher> getTeachersWithStudentMoreThanN(int numberOfStudents);
+	List<String> getTeachersWithStudentMoreThanN(int numberOfStudents);
 
-	Classroom getClassWithMaxStudentBySex(Sex sex);
+	Classroom getClassWithMaxStudentByGender(Gender gender);
 
-	Student getYoungestStudent();
+	Person getYoungestStudent();
 
 	Long countClassByGrade(int i);
 

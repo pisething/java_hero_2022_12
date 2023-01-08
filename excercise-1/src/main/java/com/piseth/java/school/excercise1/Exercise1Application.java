@@ -6,9 +6,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.piseth.java.school.excercise1.domain.Classroom;
-import com.piseth.java.school.excercise1.domain.Sex;
-import com.piseth.java.school.excercise1.domain.Student;
-import com.piseth.java.school.excercise1.domain.Teacher;
+import com.piseth.java.school.excercise1.domain.Gender;
+import com.piseth.java.school.excercise1.domain.Person;
 import com.piseth.java.school.excercise1.service.SchoolService;
 import com.piseth.java.school.excercise1.service.SchoolServiceImpl;
 
@@ -40,11 +39,11 @@ public class Exercise1Application {
 		application.schoolService.initData();
 
 		// ១. តើវិទ្យាល័យនេះមានគ្រូប្រុសប៉ុន្មាននាក់?
-		application.countTeacherBySex(Sex.MALE);
-		application.countTeacherBySex(Sex.FEMALE);
+		application.countTeacherByGender(Gender.MALE);
+		application.countTeacherByGender(Gender.FEMALE);
 		// ២. តើថ្នាក់ទី១២ក មានសិស្សស្រីប៉ុន្មាននាក់?
-		application.countStudentByClassAndSex(12, "ក", Sex.FEMALE);
-		application.countStudentByClassAndSex(12, "ក", Sex.MALE);
+		application.countStudentByClassAndGender(12, "ក", Gender.FEMALE);
+		application.countStudentByClassAndGender(12, "ក", Gender.MALE);
 		// ៣. តើសំណាងមានសិស្សសរុបប៉ុន្មាននាក់?
 		application.countStudentByTeacher("Samnang");
 		// ៤. តើសំណាងបង្រៀនប៉ុន្មានថ្នាក់ក្នុងឆ្នាំសិក្សា២០២២-២០២៣?
@@ -52,11 +51,11 @@ public class Exercise1Application {
 		// ៥. ទាំងគ្រូនិងសិស្សតើមានចំនួនសរុបប៉ុន្មាន?
 		application.countAllStudentAndTeacher();
 		// ៦. គ្រូដែលមានអាយុច្រើនជាងគេ ជាគ្រូប្រុសឬស្រី?
-		application.getSexOfEldestTeacher();
+		application.getGenderOfEldestTeacher();
 		// ៧. គ្រូណាខ្លះដែលមានសិស្សសរុបលើសពី១០០នាក់?
 		application.getTeachersWithStudentMoreThanN(20);
 		// ៨. ថ្នាក់ណាដែលមានសិស្សប្រុសច្រើនជាងគេ?
-		application.getClassWithMaxStudentBySex(Sex.MALE);
+		application.getClassWithMaxStudentBySex(Gender.MALE);
 		// ៩. សិស្សដែលក្មេងជាងគេមានឈ្មោះអ្វី?
 		application.getYoungestStudent();
 		// ១០. តើថ្នាក់ទី១២មានប៉ុន្មានថ្នាក់?
@@ -67,15 +66,15 @@ public class Exercise1Application {
 		application.countAllStudentBySchoolYear(2022);
 	}
 
-	public Long countTeacherBySex(Sex sex) {
-		Long count = schoolService.countTeacherBySex(sex);
-		System.out.println("Total of " + sex + " teachers is: " + count);
+	public Long countTeacherByGender(Gender gender) {
+		Long count = schoolService.countTeacherByGender(gender);
+		System.out.println("Total of " + gender + " teachers is: " + count);
 		return count;
 	}
 
-	public Long countStudentByClassAndSex(int grade, String className, Sex sex) {
-		Long count = schoolService.countStudentByClassAndSex(grade, className, sex);
-		System.out.println(String.format("Total of %s students in class %d%s is: %d", sex, grade, className, count));
+	public Long countStudentByClassAndGender(int grade, String className, Gender gender) {
+		Long count = schoolService.countStudentByClassAndGender(grade, className, gender);
+		System.out.println(String.format("Total of %s students in class %d%s is: %d", gender, grade, className, count));
 		return count;
 	}
 
@@ -97,28 +96,28 @@ public class Exercise1Application {
 		return count;
 	}
 
-	public Sex getSexOfEldestTeacher() {
-		Sex sex = schoolService.getSexOfEldestTeacher();
-		System.out.println(String.format("The eldest teacher is a %s teacher.", sex));
-		return sex;
+	public Gender getGenderOfEldestTeacher() {
+		Gender gender = schoolService.getGenderOfEldestTeacher();
+		System.out.println(String.format("The eldest teacher is a %s teacher.", gender));
+		return gender;
 	}
 
-	public List<Teacher> getTeachersWithStudentMoreThanN(int numberOfStudents) {
-		List<Teacher> teachers = schoolService.getTeachersWithStudentMoreThanN(numberOfStudents);
+	public List<String> getTeachersWithStudentMoreThanN(int numberOfStudents) {
+		List<String> teacherNames = schoolService.getTeachersWithStudentMoreThanN(numberOfStudents);
 		System.out.println(String.format("These are the teachers with students more than %d:", numberOfStudents));
-		teachers.stream().map(t -> String.format("%s : %d", t.getName(), t.getStudentCount())).forEach(System.out::println);
-		return teachers;
+		teacherNames.stream().forEach(System.out::println);
+		return teacherNames;
 	}
 
-	public Classroom getClassWithMaxStudentBySex(Sex sex) {
-		Classroom result = schoolService.getClassWithMaxStudentBySex(sex);
-		System.out.println(String.format("Class with max %s students is: %d%s - %d", sex, result.getGrade(),
+	public Classroom getClassWithMaxStudentBySex(Gender gender) {
+		Classroom result = schoolService.getClassWithMaxStudentByGender(gender);
+		System.out.println(String.format("Class with max %s students is: %d%s - %d", gender, result.getGrade(),
 				result.getName(), result.getSchoolYear()));
 		return result;
 	}
 
-	public Student getYoungestStudent() {
-		Student result = schoolService.getYoungestStudent();
+	public Person getYoungestStudent() {
+		Person result = schoolService.getYoungestStudent();
 		System.out.println(String.format("The youngest student is: %s", result.getName()));
 		return result;
 	}
