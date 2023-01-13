@@ -8,9 +8,10 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Classroom {
-	private int schoolYear;
+	private Long id;
+	private int schoolYear; //ending year
 	private int grade;
 	private String name;
 	private List<Teacher> teachers;
-	private List<Person> students;
+	private List<Student> students;
 }

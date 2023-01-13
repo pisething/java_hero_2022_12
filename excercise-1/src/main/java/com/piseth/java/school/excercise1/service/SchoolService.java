@@ -4,27 +4,27 @@ import java.util.List;
 
 import com.piseth.java.school.excercise1.domain.Classroom;
 import com.piseth.java.school.excercise1.domain.Gender;
-import com.piseth.java.school.excercise1.domain.Person;
+import com.piseth.java.school.excercise1.domain.Student;
 
 public interface SchoolService {
 
-	Long countTeacherByGender(Gender gender);
+	Long countTeacherByGender(int schoolYear, Gender gender);
 
-	Long countStudentByClassAndGender(int grade, String className, Gender gender);
+	Long countStudentByClassAndGender(int schoolYear, int grade, String className, Gender gender);
 
-	Long countStudentByTeacher(String tName);
+	Long countStudentByTeacher(int schoolYear, String tName);
 
-	Long countClassByTeacherAndSchoolYear(String tName, int schoolYear);
+	Long countClassByTeacherAndSchoolYear(int schoolYear, String tName);
 
-	Long countAllStudentAndTeacher();
+	Long countAllStudentAndTeacher(int schoolYear);
 
-	Gender getGenderOfEldestTeacher();
+	Gender getGenderOfEldestTeacher(int schoolYear);
 
-	List<String> getTeachersWithStudentMoreThanN(int numberOfStudents);
+	List<String> getTeachersWithStudentMoreThanN(int schoolYear, int numberOfStudents);
 
 	Classroom getClassWithMaxStudentByGender(Gender gender);
 
-	Person getYoungestStudent();
+	Student getYoungestStudent();
 
 	Long countClassByGrade(int i);
 

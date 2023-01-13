@@ -1,5 +1,11 @@
 package com.piseth.java.school.excercise1.domain;
 
-public enum Subject {
-	MATH, KHMER, PHYSICS;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public class Subject {
+	private Long id;
+	private String name;
 }

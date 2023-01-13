@@ -9,6 +9,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Person {
+	private Long id;
 	private String name;
 	private Gender gender;
 	private LocalDate birthDate;

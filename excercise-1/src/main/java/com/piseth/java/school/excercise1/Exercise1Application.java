@@ -39,21 +39,21 @@ public class Exercise1Application {
 		application.schoolService.initData();
 
 		// ១. តើវិទ្យាល័យនេះមានគ្រូប្រុសប៉ុន្មាននាក់?
-		application.countTeacherByGender(Gender.MALE);
-		application.countTeacherByGender(Gender.FEMALE);
+		application.countTeacherByGender(2023, Gender.MALE);
+		application.countTeacherByGender(2023, Gender.FEMALE);
 		// ២. តើថ្នាក់ទី១២ក មានសិស្សស្រីប៉ុន្មាននាក់?
-		application.countStudentByClassAndGender(12, "ក", Gender.FEMALE);
-		application.countStudentByClassAndGender(12, "ក", Gender.MALE);
+		application.countStudentByClassAndGender(2023, 12, "ក", Gender.FEMALE);
+		application.countStudentByClassAndGender(2023, 12, "ក", Gender.MALE);
 		// ៣. តើសំណាងមានសិស្សសរុបប៉ុន្មាននាក់?
-		application.countStudentByTeacher("Samnang");
+		application.countStudentByTeacher(2023, "Samnang");
 		// ៤. តើសំណាងបង្រៀនប៉ុន្មានថ្នាក់ក្នុងឆ្នាំសិក្សា២០២២-២០២៣?
-		application.countClassByTeacherAndSchoolYear("Samnang", 2023);
+		application.countClassByTeacherAndSchoolYear(2023, "Samnang");
 		// ៥. ទាំងគ្រូនិងសិស្សតើមានចំនួនសរុបប៉ុន្មាន?
-		application.countAllStudentAndTeacher();
+		application.countAllStudentAndTeacher(2023);
 		// ៦. គ្រូដែលមានអាយុច្រើនជាងគេ ជាគ្រូប្រុសឬស្រី?
-		application.getGenderOfEldestTeacher();
+		application.getGenderOfEldestTeacher(2023);
 		// ៧. គ្រូណាខ្លះដែលមានសិស្សសរុបលើសពី១០០នាក់?
-		application.getTeachersWithStudentMoreThanN(20);
+		application.getTeachersWithStudentMoreThanN(2023, 20);
 		// ៨. ថ្នាក់ណាដែលមានសិស្សប្រុសច្រើនជាងគេ?
 		application.getClassWithMaxStudentBySex(Gender.MALE);
 		// ៩. សិស្សដែលក្មេងជាងគេមានឈ្មោះអ្វី?
@@ -66,45 +66,45 @@ public class Exercise1Application {
 		application.countAllStudentBySchoolYear(2022);
 	}
 
-	public Long countTeacherByGender(Gender gender) {
-		Long count = schoolService.countTeacherByGender(gender);
-		System.out.println("Total of " + gender + " teachers is: " + count);
+	public Long countTeacherByGender(int schoolYear, Gender gender) {
+		Long count = schoolService.countTeacherByGender(schoolYear, gender);
+		System.out.println("Total of " + gender + " teachers for " + schoolYear + " is: " + count);
 		return count;
 	}
 
-	public Long countStudentByClassAndGender(int grade, String className, Gender gender) {
-		Long count = schoolService.countStudentByClassAndGender(grade, className, gender);
-		System.out.println(String.format("Total of %s students in class %d%s is: %d", gender, grade, className, count));
+	public Long countStudentByClassAndGender(int schoolYear, int grade, String className, Gender gender) {
+		Long count = schoolService.countStudentByClassAndGender(schoolYear, grade, className, gender);
+		System.out.println(String.format("Total of %s students in class %d%s (%d) is: %d", gender, grade, className, schoolYear, count));
 		return count;
 	}
 
-	public Long countStudentByTeacher(String tName) {
-		Long count = schoolService.countStudentByTeacher(tName);
-		System.out.println(String.format("Teacher '%s' has %d students", tName, count));
+	public Long countStudentByTeacher(int schoolYear, String tName) {
+		Long count = schoolService.countStudentByTeacher(schoolYear, tName);
+		System.out.println(String.format("Teacher '%s' has %d students in year %d", tName, count, schoolYear));
 		return count;
 	}
 
-	public Long countClassByTeacherAndSchoolYear(String tName, int schoolYear) {
-		Long count = schoolService.countClassByTeacherAndSchoolYear(tName, schoolYear);
+	public Long countClassByTeacherAndSchoolYear(int schoolYear, String tName) {
+		Long count = schoolService.countClassByTeacherAndSchoolYear(schoolYear, tName);
 		System.out.println(String.format("For year %d, T.'%s' has %d class(es)", schoolYear, tName, count));
 		return count;
 	}
 
-	public Long countAllStudentAndTeacher() {
-		Long count = schoolService.countAllStudentAndTeacher();
-		System.out.println(String.format("Total number of teachers and students is: %d", count));
+	public Long countAllStudentAndTeacher(int schoolYear) {
+		Long count = schoolService.countAllStudentAndTeacher(schoolYear);
+		System.out.println(String.format("Total number of teachers and students in %d is: %d", schoolYear, count));
 		return count;
 	}
 
-	public Gender getGenderOfEldestTeacher() {
-		Gender gender = schoolService.getGenderOfEldestTeacher();
+	public Gender getGenderOfEldestTeacher(int schoolYear) {
+		Gender gender = schoolService.getGenderOfEldestTeacher(schoolYear);
 		System.out.println(String.format("The eldest teacher is a %s teacher.", gender));
 		return gender;
 	}
 
-	public List<String> getTeachersWithStudentMoreThanN(int numberOfStudents) {
-		List<String> teacherNames = schoolService.getTeachersWithStudentMoreThanN(numberOfStudents);
-		System.out.println(String.format("These are the teachers with students more than %d:", numberOfStudents));
+	public List<String> getTeachersWithStudentMoreThanN(int schoolYear, int numberOfStudents) {
+		List<String> teacherNames = schoolService.getTeachersWithStudentMoreThanN(schoolYear, numberOfStudents);
+		System.out.println(String.format("These are the teachers with students more than %d in %d:", numberOfStudents, schoolYear));
 		teacherNames.stream().forEach(System.out::println);
 		return teacherNames;
 	}
