@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.piseth.java.school.excercise1.model.ClassRoom;
 import com.piseth.java.school.excercise1.model.Gender;
+import com.piseth.java.school.excercise1.model.Student;
 import com.piseth.java.school.excercise1.model.Teacher;
 
 public interface SchoolService {
@@ -21,4 +22,12 @@ public interface SchoolService {
 	Optional<Teacher> findOldestTeacher(List<ClassRoom> classRooms,int startYear);
 	
 	List<Teacher> findTeacherByNumberOfStudent(List<ClassRoom> classRooms,int startYear, int numberOfStudent);
+	
+	ClassRoom findClassRoomWhichHasTheMostStudentByGender(List<ClassRoom> classRooms,int startYear, Gender gender);
+	
+	Optional<Student> findYoungestStudent(List<ClassRoom> classRooms,int startYear);
+	
+	Long getNumberOfClassRoomByGrade(List<ClassRoom> classRooms,int startYear, int grade);
+	
+	int compareNumberOfStudentByYear(List<ClassRoom> classRooms,int year1, int year2);
 }
