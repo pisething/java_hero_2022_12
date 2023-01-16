@@ -61,7 +61,7 @@ public class SchoolHelper {
 		return List.of(
 				new ClassRoom(1L, "A", 12, 2022, teachers.subList(0, 2), students.subList(0, 4)),
 				new ClassRoom(2L, "B", 12, 2022, teachers.subList(0, 2), students.subList(4, 8)),
-				new ClassRoom(3L, "A", 11, 2022, teachers.subList(1, 3), students.subList(8, 11))
+				new ClassRoom(3L, "A", 11, 2022, teachers.subList(1, 3), students.subList(8, 10))
 				);
 	}
 
