@@ -1,11 +1,12 @@
 package com.piseth.java.school.excercise1;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.util.List;
 import java.util.Optional;
 
 import com.piseth.java.school.excercise1.model.ClassRoom;
+import com.piseth.java.school.excercise1.model.Student;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -87,7 +88,7 @@ public class SchoolServiceTest {
 	}
 
 	@Test
-	public void testFindByNumberOfStudent() {
+	public void testFindTeacherByNumberOfStudent() {
 
 		List<ClassRoom> classRooms = SchoolHelper.getClassRooms();
 
@@ -96,6 +97,59 @@ public class SchoolServiceTest {
 		assertEquals(0, teacherByNumberOfStudent.size());
 	}
 
+	@Test
+	public void testFindClassRoomWhichHasTheMostStudentByGender() {
+
+		List<ClassRoom> classRooms = SchoolHelper.getClassRooms();
+
+		final ClassRoom classRoomWhichHasTheMostStudentByGender = schoolService.findClassRoomWhichHasTheMostStudentByGender(classRooms, 2022, Gender.MALE);
+
+		assertEquals("A", classRoomWhichHasTheMostStudentByGender.getName());
+
+	}
+
+	@Test
+	public void testFindYoungestStudent() {
+
+		List<ClassRoom> classRooms = SchoolHelper.getClassRooms();
+
+		final Optional<Student> youngestStudent = schoolService.findYoungestStudent(classRooms, 2022);
+
+		assertTrue(youngestStudent.isPresent());
+		assertEquals("Reaksmey", youngestStudent.get().getName());
+	}
+
+	@Test
+	public void testGetNumberOfClassRoomByGrade() {
+
+		List<ClassRoom> classRooms = SchoolHelper.getClassRooms();
+
+		final Long numberOfClassRoomByGrade = schoolService.getNumberOfClassRoomByGrade(classRooms, 2022, 12);
+
+		assertEquals(2, numberOfClassRoomByGrade);
+
+	}
+
+	@Test
+	public void testCompareNumberOfStudentByYearFail() {
+
+		List<ClassRoom> classRooms = SchoolHelper.getClassRooms();
+
+		assertThatThrownBy(() -> schoolService.compareNumberOfStudentByYear(classRooms, 2022, 2023))
+				.isInstanceOf(RuntimeException.class).hasMessage("There is no classroom in year = 2023");
+
+	}
+
+	@Test
+	public void testCompareNumberOfStudentByYearSuccess() {
+
+		List<ClassRoom> classRooms = SchoolHelper.getClassRooms();
+
+		final int i = schoolService.compareNumberOfStudentByYear(classRooms, 2022, 2021);
+
+		assertEquals(2, i);
+
+	}
 
 }
 
