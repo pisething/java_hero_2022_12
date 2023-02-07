@@ -82,6 +82,7 @@ public class SchoolServiceImpl implements SchoolService{
 
 	@Override
 	public List<Teacher> findTeacherByNumberOfStudent(List<ClassRoom> classRooms, int startYear, int numberOfStudent) {
+		// this is filtered by number of student per class & year, while I think, we should filter by year of combine class of each teacher
 		return classRooms.stream()
 		.filter(cr -> cr.getStartYear() == startYear)
 		.filter(cr -> cr.getStudents().size() > numberOfStudent)
